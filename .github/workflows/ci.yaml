@@ -147,13 +147,13 @@ jobs:
           rm -rf Assets/UERP
           rm -rf Assets/UERP.meta
         
-    #   - name: Downgrade VRCSDK to 3.7.2
-    #     working-directory: ${{ env.workspace-path }}
-    #     run: |
-    #       vrc-get remove com.vrchat.worlds -y
-    #       vrc-get remove com.vrchat.base -y
-    #       vrc-get install com.vrchat.worlds 3.7.2 -y
-    #       vrc-get install com.vrchat.base 3.7.2 -y
+      - name: Downgrade VRCSDK to 3.7.1
+        working-directory: ${{ env.workspace-path }}
+        run: |
+          vrc-get remove com.vrchat.worlds -y
+          vrc-get remove com.vrchat.base -y
+          vrc-get install com.vrchat.worlds 3.7.1 -y
+          vrc-get install com.vrchat.base 3.7.1 -y
 
       - name: Add Source Package to vrc-get
         if: github.event_name == 'release'
@@ -172,9 +172,9 @@ jobs:
         working-directory: ${{ env.workspace-path }}
         run: vrc-get install com.yuxiaviation.vrchat.autobuild.world -y
 
-    #   - name: Add Patcher Package to fix SDK Build on Linux
-    #     working-directory: ${{ env.workspace-path }}
-    #     run: vrc-get install cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds -y
+      - name: Add Patcher Package to fix SDK Build on Linux
+        working-directory: ${{ env.workspace-path }}
+        run: vrc-get install cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds -y
 
       - name: Cache Library
         uses: actions/cache@v4
