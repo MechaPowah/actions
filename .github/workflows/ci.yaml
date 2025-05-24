@@ -197,17 +197,17 @@ jobs:
           docker run \
             -v ${{ env.workspace-path }}:/project \
             -v ${{ github.workspace }}/tmp:/tmp/DefaultCompany/ \
-            -e VRC_AUTO_BUILD_USERNAME=$VRC_AUTO_BUILD_USERNAME \
-            -e VRC_AUTO_BUILD_PASSWORD=$VRC_AUTO_BUILD_PASSWORD \
-            -e VRC_AUTO_BUILD_TOTP_KEY=$VRC_AUTO_BUILD_TOTP_KEY \
-            -e VRC_AUTO_BUILD_SCENE_PATH=$VRC_AUTO_BUILD_SCENE_PATH \
-            -e VRC_AUTO_BUILD_CONTENT_ID=$VRC_AUTO_BUILD_CONTENT_ID \
+            -e VRC_AUTO_BUILD_USERNAME=\$VRC_AUTO_BUILD_USERNAME \
+            -e VRC_AUTO_BUILD_PASSWORD=\$VRC_AUTO_BUILD_PASSWORD \
+            -e VRC_AUTO_BUILD_TOTP_KEY=\$VRC_AUTO_BUILD_TOTP_KEY \
+            -e VRC_AUTO_BUILD_SCENE_PATH=\$VRC_AUTO_BUILD_SCENE_PATH \
+            -e VRC_AUTO_BUILD_CONTENT_ID=\$VRC_AUTO_BUILD_CONTENT_ID \
             ${{ env.unity-docker-image }} \
             unity-editor -projectPath /project \
             -username ${{ secrets.UNITY_EMAIL }} -password ${{ secrets.UNITY_PASSWORD }} -serial ${{ env.UNITY_SERIAL }} \
             -batchmode -logFile - \
             -buildTarget Win64 \
-            -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildWorld
+            -executeMethod VRChatAerospaceUniversity.VRChatAutoBuild.Worlds.AutoBuildVRChatWorld.BuildAndUploadWorld
         env:
           VRC_AUTO_BUILD_CONTENT_ID: ${{ secrets.NIGHTLY_WORLD_CONTENT_ID }}
           VRC_AUTO_BUILD_SCENE_PATH: ${{ secrets.WORKSPACE_SCENE_PATH }}
